@@ -17,8 +17,8 @@ import org.apache.logging.log4j.Logger;
 
 public class TestHelper {
 	
-	public static final int QUANTITY_OF_RANDOM_WORDS = 3;
-	private static Random random = new Random();
+    public static final int QUANTITY_OF_RANDOM_WORDS = 3;
+    private static Random random = new Random();
     private final static Logger LOGGER = LogManager.getLogger();
 
     private TestHelper() {}
@@ -87,34 +87,34 @@ public class TestHelper {
 	}
 	
 	private static HashMap<String, String> hashMapFromFileImplementation(String fileName) {
-		if (fileName == null) {
-            String msg = "Path parameter should be not a null";
+	    if (fileName == null) {
+			String msg = "Path parameter should be not a null";
             LOGGER.error(msg);
 			throw new RuntimeException(msg);
-		}
-		Path path = Path.of(fileName).toAbsolutePath();
-		if (!Files.exists(path)) {
+	    }
+	    Path path = Path.of(fileName).toAbsolutePath();
+	    if (!Files.exists(path)) {
             String msg = String.format("File \"%s\" is not found", fileName);
             LOGGER.error(msg);
 			throw new RuntimeException(msg);
-		}
-		Map<String, String> resultMap = new HashMap<>();
-		try (Stream<String> stream = Files.lines(path)) {
+	    }
+	    Map<String, String> resultMap = new HashMap<>();
+	    try (Stream<String> stream = Files.lines(path)) {
 			stream.forEach(s -> {
 				if (s.split("::").length == 2) {
 					resultMap.put(s.split("::")[0].trim(), s.split("::")[1].trim());
 				} else {
-                    String msg = String.format("Wrong data format at the line: \"%s\"", s);
-                    LOGGER.error(msg);
+					String msg = String.format("Wrong data format at the line: \"%s\"", s);
+					LOGGER.error(msg);
 					throw new RuntimeException(msg);
 				}
 			});
-		} catch (IOException e) {
-            String msg = String.format("Error was happened: %s", e.getMessage());
-            LOGGER.error(msg);
+	    } catch (IOException e) {
+			String msg = String.format("Error was happened: %s", e.getMessage());
+			LOGGER.error(msg);
 			throw new RuntimeException(msg);
-		}
-		return (HashMap<String, String>) resultMap;
+	    }
+	    return (HashMap<String, String>) resultMap;
 	}
 	
 	/* #5 Parses Calendar object from string 
@@ -123,22 +123,22 @@ public class TestHelper {
 	 * @return Calendar object had been parsed from string
 	 */
 	public static Calendar calendarFromString(String dateString) {
-		if (dateString != null) {
+	    if (dateString != null) {
             return calendarFromStringImplementation(dateString);
-		}
-        String msg = "Parameter should be not a null";
-        LOGGER.error(msg);
-        throw new RuntimeException(msg);
+	    }
+		String msg = "Parameter should be not a null";
+		LOGGER.error(msg);
+		throw new RuntimeException(msg);
 	}
 	
 	private static Calendar calendarFromStringImplementation(String dateString) {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd.M.yyyy");
 		Date date;
 		try {
-			date = formatter.parse(dateString);
+		     date = formatter.parse(dateString);
 		} catch (ParseException e) {
-			LOGGER.error(e.getMessage());
-        	throw new RuntimeException(e);
+		     LOGGER.error(e.getMessage());
+        	 throw new RuntimeException(e);
 		}
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
