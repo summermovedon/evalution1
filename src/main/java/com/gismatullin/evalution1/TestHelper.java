@@ -88,9 +88,9 @@ public class TestHelper {
 	
 	private static HashMap<String, String> hashMapFromFileImplementation(String fileName) {
 	    if (fileName == null) {
-			String msg = "Path parameter should be not a null";
+		    String msg = "Path parameter should be not a null";
             LOGGER.error(msg);
-			throw new RuntimeException(msg);
+		    throw new RuntimeException(msg);
 	    }
 	    Path path = Path.of(fileName).toAbsolutePath();
 	    if (!Files.exists(path)) {
